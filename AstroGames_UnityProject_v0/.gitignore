@@ -8,3 +8,12 @@
 *.csproj
 *.unityproj
 *.sln
+
+# macOS
+.DS_Store
+
+# VS Code
+.vscode/
+
+# Unity generated IDE files
+*.slnx
