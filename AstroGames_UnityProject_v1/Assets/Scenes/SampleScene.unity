@@ -133,6 +133,7 @@ GameObject:
   - component: {fileID: 23629770}
   - component: {fileID: 23629775}
   - component: {fileID: 23629774}
+  - component: {fileID: 23629776}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -140,6 +141,20 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &23629776
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 23629769}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39bdeff643ed431fab7c3f910ed193cc, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerRespawn
+  spawnPoint: {fileID: 0}
+  fallThreshold: -12
 --- !u!61 &23629770
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -452,6 +467,7 @@ GameObject:
   - component: {fileID: 98414231}
   - component: {fileID: 98414230}
   - component: {fileID: 98414229}
+  - component: {fileID: 98414234}
   m_Layer: 6
   m_Name: Spikes_Past
   m_TagString: Untagged
@@ -459,6 +475,18 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &98414234
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 98414227}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 267a3605d58348c4b3e8ab303144f09e, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::HazardContact
 --- !u!4 &98414228
 Transform:
   m_ObjectHideFlags: 0
@@ -2390,6 +2418,7 @@ GameObject:
   - component: {fileID: 166681605}
   - component: {fileID: 166681604}
   - component: {fileID: 166681603}
+  - component: {fileID: 166681608}
   m_Layer: 6
   m_Name: Lasers_Present
   m_TagString: Untagged
@@ -2397,6 +2426,18 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &166681608
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 166681601}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 267a3605d58348c4b3e8ab303144f09e, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::HazardContact
 --- !u!4 &166681602
 Transform:
   m_ObjectHideFlags: 0
