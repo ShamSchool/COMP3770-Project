@@ -10,6 +10,10 @@ public class PlayerRespawn : MonoBehaviour
     [Tooltip("Respawn when the player's world Y position falls below this value.")]
     [SerializeField] private float fallThreshold = -12f;
 
+    // Fired every time the player dies (hit a hazard or fell off the level), just before respawning.
+    // Other scripts (audio, screen effects, death counter) can listen without touching this one.
+    public static event System.Action PlayerDiedEvent;
+
     private Rigidbody2D body;
     private Vector3 initialPosition;
     private Quaternion initialRotation;
@@ -39,6 +43,10 @@ public class PlayerRespawn : MonoBehaviour
         }
 
         respawnRequested = false;
+
+        // Let listeners know the player died (death sound, etc.).
+        PlayerDiedEvent?.Invoke();
+
         Vector3 position = spawnPoint != null ? spawnPoint.position : initialPosition;
         Quaternion rotation = spawnPoint != null ? spawnPoint.rotation : initialRotation;
 

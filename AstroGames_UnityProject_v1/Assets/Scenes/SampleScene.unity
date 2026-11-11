@@ -141,20 +141,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &23629776
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 23629769}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 39bdeff643ed431fab7c3f910ed193cc, type: 3}
-  m_Name:
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerRespawn
-  spawnPoint: {fileID: 0}
-  fallThreshold: -12
 --- !u!61 &23629770
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -453,6 +439,20 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &23629776
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 23629769}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39bdeff643ed431fab7c3f910ed193cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerRespawn
+  spawnPoint: {fileID: 0}
+  fallThreshold: -12
 --- !u!1 &98414227
 GameObject:
   m_ObjectHideFlags: 0
@@ -475,18 +475,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &98414234
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 98414227}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 267a3605d58348c4b3e8ab303144f09e, type: 3}
-  m_Name:
-  m_EditorClassIdentifier: Assembly-CSharp::HazardContact
 --- !u!4 &98414228
 Transform:
   m_ObjectHideFlags: 0
@@ -968,6 +956,18 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!114 &98414234
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 98414227}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 267a3605d58348c4b3e8ab303144f09e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HazardContact
 --- !u!1 &103313308
 GameObject:
   m_ObjectHideFlags: 0
@@ -2426,18 +2426,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &166681608
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 166681601}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 267a3605d58348c4b3e8ab303144f09e, type: 3}
-  m_Name:
-  m_EditorClassIdentifier: Assembly-CSharp::HazardContact
 --- !u!4 &166681602
 Transform:
   m_ObjectHideFlags: 0
@@ -3193,6 +3181,18 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!114 &166681608
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 166681601}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 267a3605d58348c4b3e8ab303144f09e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HazardContact
 --- !u!1 &466321499
 GameObject:
   m_ObjectHideFlags: 0
@@ -6969,6 +6969,64 @@ TilemapCollider2D:
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0
   m_UseDelaunayMesh: 0
+--- !u!1 &1606941780
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1606941782}
+  - component: {fileID: 1606941781}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1606941781
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1606941780}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39b3111198df8bb4db98bf0ef216c545, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  presentMusic: {fileID: 8300000, guid: 1a2387710b121e04db4ea46810a5bf14, type: 3}
+  pastMusic: {fileID: 8300000, guid: ab6c6e5b5d8ae924a89eab47fc0e2284, type: 3}
+  musicVolume: 0.6
+  crossfadeTime: 0.6
+  warpToPastSfx: {fileID: 8300000, guid: 911dbdf573944624ab3c5c5920aac744, type: 3}
+  warpToPresentSfx: {fileID: 8300000, guid: a8670ccedc7ea5e4d8612dec84baa5bc, type: 3}
+  sfxVolume: 1
+  pitchVariation: 0.03
+  deathSfx: {fileID: 8300000, guid: 8b28092da1c50734897ee196fa788964, type: 3}
+  deathVolume: 0.9
+  muffleDuringWarp: 1
+  muffledCutoff: 800
+  startInPast: 0
+  logVolumes: 1
+--- !u!4 &1606941782
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1606941780}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 5.00492, y: 1.95255, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2010166935
 GameObject:
   m_ObjectHideFlags: 0
@@ -7012,3 +7070,4 @@ SceneRoots:
   - {fileID: 1422400647}
   - {fileID: 630296638}
   - {fileID: 466321500}
+  - {fileID: 1606941782}
