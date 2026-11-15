@@ -54,6 +54,8 @@ public class PlayerMovement : MonoBehaviour
 
     public void Jump(InputAction.CallbackContext context)
     {
+        if (PauseMenu.paused) 
+            return;
         if (jumpsRemaining > 0)
         {
             if (context.performed)
