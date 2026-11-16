@@ -1358,51 +1358,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 267a3605d58348c4b3e8ab303144f09e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HazardContact
---- !u!1 &102968969
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 102968971}
-  - component: {fileID: 102968970}
-  m_Layer: 0
-  m_Name: PauseManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &102968970
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 102968969}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6ebe37ba855a3b145ac3eb8381a2f95d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PauseMenu
-  pauseScreen: {fileID: 396096164}
---- !u!4 &102968971
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 102968969}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 737.5553, y: 853.0555, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &103313308
 GameObject:
   m_ObjectHideFlags: 0
@@ -12636,11 +12591,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 267a3605d58348c4b3e8ab303144f09e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HazardContact
---- !u!1 &396096164 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6514549794089664311, guid: 39497a5ae4f30164ab73f1a2728f21b9, type: 3}
-  m_PrefabInstance: {fileID: 6357223339239150211}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &466321499
 GameObject:
   m_ObjectHideFlags: 0
@@ -12832,7 +12782,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 23.31, y: -5.2, z: -10}
+  m_LocalPosition: {x: 23.221, y: -5.9, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -13103,7 +13053,7 @@ Transform:
   m_GameObject: {fileID: 630296635}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 23.31, y: -5.2, z: -10}
+  m_LocalPosition: {x: 23.221, y: -5.9, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -13257,11 +13207,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2688765118411173758, guid: 403cf798583237742904d8d2d51314c4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 23.31
+      value: 23.221
       objectReference: {fileID: 0}
     - target: {fileID: 2688765118411173758, guid: 403cf798583237742904d8d2d51314c4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -5.2
+      value: -5.9
       objectReference: {fileID: 0}
     - target: {fileID: 2688765118411173758, guid: 403cf798583237742904d8d2d51314c4, type: 3}
       propertyPath: m_LocalPosition.z
@@ -13300,25 +13250,9 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 8745957771961697714, guid: 403cf798583237742904d8d2d51314c4, type: 3}
-      propertyPath: m_ActionEvents.Array.data[14].m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8745957771961697714, guid: 403cf798583237742904d8d2d51314c4, type: 3}
       propertyPath: m_ActionEvents.Array.data[14].m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 466321501}
-    - target: {fileID: 8745957771961697714, guid: 403cf798583237742904d8d2d51314c4, type: 3}
-      propertyPath: m_ActionEvents.Array.data[14].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SwapInput
-      objectReference: {fileID: 0}
-    - target: {fileID: 8745957771961697714, guid: 403cf798583237742904d8d2d51314c4, type: 3}
-      propertyPath: m_ActionEvents.Array.data[14].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: TimeWarpManager, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 8745957771961697714, guid: 403cf798583237742904d8d2d51314c4, type: 3}
-      propertyPath: m_ActionEvents.Array.data[14].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
-      value: TimeWarpManager.swap
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -107738,14 +107672,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1838100395135013337, guid: 39497a5ae4f30164ab73f1a2728f21b9, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 102968970}
-    - target: {fileID: 2433333915400643016, guid: 39497a5ae4f30164ab73f1a2728f21b9, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 102968970}
     - target: {fileID: 2523440038145348451, guid: 39497a5ae4f30164ab73f1a2728f21b9, type: 3}
       propertyPath: m_Name
       value: PauseMenuCanvas
@@ -107848,6 +107774,5 @@ SceneRoots:
   - {fileID: 466321500}
   - {fileID: 1606941782}
   - {fileID: 995908596}
-  - {fileID: 102968971}
   - {fileID: 6357223339239150211}
   - {fileID: 1773662094}
