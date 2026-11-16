@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
-using UnityEngine.EventSystems;
 
 //Summary:
 //Pause menu opened with escape or clickable pause button.
@@ -16,7 +15,7 @@ public class PauseMenu : MonoBehaviour
     private void Start()
     {
 
-        ResumeGame();
+        ResumeLevel();
 
     }
 
@@ -27,15 +26,15 @@ public class PauseMenu : MonoBehaviour
         {
 
             if (paused)
-                ResumeGame();
+                ResumeLevel();
             else
-                PauseGame();
+                PauseLevel();
 
         }
 
     }
 
-    public void PauseGame()
+    public void PauseLevel()
     {
 
         pauseScreen.SetActive(true);
@@ -44,12 +43,32 @@ public class PauseMenu : MonoBehaviour
 
     }
 
-    public void ResumeGame()
+    public void ResumeLevel()
     {
 
         pauseScreen.SetActive(false);
         Time.timeScale = 1;
         paused = false;
+
+    }
+
+    public void RestartLevel()
+    {
+
+        Time.timeScale = 1;
+        paused = false;
+
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+
+    }
+
+    public void ReturnToMainMenu()
+    {
+
+        Time.timeScale = 1;
+        paused = false;
+
+        SceneManager.LoadScene("Main_Menu");
 
     }
 

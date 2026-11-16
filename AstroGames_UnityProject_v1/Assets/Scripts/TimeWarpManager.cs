@@ -107,6 +107,7 @@ public class TimeWarpManager : MonoBehaviour
 
     }
 
+    [SerializeField] private float feetIgnore = 0.6f;
     public bool PlayerTargetTimeCollision(Tilemap map)
     {
 
@@ -114,9 +115,10 @@ public class TimeWarpManager : MonoBehaviour
 
         //Shrink bound so standing on a floor doesn't cause swapping to fail
         bound.Expand(-0.05f);
+        Vector3 checkFloorCollision = bound.min + new Vector3(0, feetIgnore, 0);
 
         //Find grid cells and the bottom-left and top-right corners of the player's collider
-        Vector3Int bottomLeftCell = Vector3Int.FloorToInt(map.transform.InverseTransformPoint(bound.min));
+        Vector3Int bottomLeftCell = Vector3Int.FloorToInt(map.transform.InverseTransformPoint(checkFloorCollision));
         Vector3Int topRightCell = Vector3Int.FloorToInt(map.transform.InverseTransformPoint(bound.max));
 
         //Iterate through every cell the player covers and check for collision
@@ -129,7 +131,7 @@ public class TimeWarpManager : MonoBehaviour
                 //Check cell for a tile
                 if(map.HasTile(new Vector3Int(x, y, 0)))
                 {
-
+                    Debug.Log("Blocked by " + map.name + " at cell (" + x + ", " + y + "), checking " + bottomLeftCell + " to " + topRightCell);
                     return true;
 
                 }
