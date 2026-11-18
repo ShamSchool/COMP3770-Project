@@ -8,47 +8,121 @@ using UnityEngine;
 // Setup: put this on an empty GameObject (e.g. "AudioManager") in the scene and
 // drag in the clips. It listens to TimeWarpManager.TimeSwappedEvent, so warps
 // trigger it automatically. Set "Start In Past" to match TimeWarpManager.
+/// <summary>
+/// Crossfades past/present music and plays effects in response to warp and death events.
+/// </summary>
+/// <remarks>
+/// Listens to TimeWarpManager.TimeSwappedEvent and PlayerRespawn.PlayerDiedEvent. Creates audio sources and filters for music and effects.
+/// </remarks>
+/// <seealso cref="TimeWarpManager"/>
+/// <seealso cref="PlayerRespawn"/>
 public class WarpAudio : MonoBehaviour
 {
+    /// <summary>
+    /// Current instance, assigned in Awake and cleared when that instance is destroyed.
+    /// </summary>
     public static WarpAudio Instance { get; private set; }
 
+    /// <summary>
+    /// Music clip for the present timeline; matching the past track length and tempo is recommended.
+    /// </summary>
     [Header("Music (both clips should be the same length and tempo)")]
     public AudioClip presentMusic;
+    /// <summary>
+    /// Music clip for the past timeline, started in sync with presentMusic.
+    /// </summary>
     public AudioClip pastMusic;
+    /// <summary>
+    /// Target volume of the currently active timeline music.
+    /// </summary>
     [Range(0f, 1f)] public float musicVolume = 0.6f;
+    /// <summary>
+    /// Duration of a timeline music transition in unscaled seconds.
+    /// </summary>
     public float crossfadeTime = 0.6f;
 
+    /// <summary>
+    /// One-shot effect played when changing to the past.
+    /// </summary>
     [Header("Warp sound effects")]
     public AudioClip warpToPastSfx;
+    /// <summary>
+    /// One-shot effect played when changing to the present.
+    /// </summary>
     public AudioClip warpToPresentSfx;
+    /// <summary>
+    /// Volume multiplier for warp sound effects.
+    /// </summary>
     [Range(0f, 1f)] public float sfxVolume = 1f;
+    /// <summary>
+    /// Maximum random pitch offset applied to warp and death effects.
+    /// </summary>
     [Tooltip("Random pitch change per warp so a repeated sound doesn't get tiring. 0.03 = +/-3%.")]
     [Range(0f, 0.1f)] public float pitchVariation = 0.03f;
 
+    /// <summary>
+    /// Optional one-shot effect played when PlayerRespawn reports a death.
+    /// </summary>
     [Header("Death sound")]
     public AudioClip deathSfx;
+    /// <summary>
+    /// Volume multiplier for the death sound effect.
+    /// </summary>
     [Range(0f, 1f)] public float deathVolume = 0.9f;
 
+    /// <summary>
+    /// Whether low-pass filters temporarily muffle the music during transitions.
+    /// </summary>
     [Header("Muffle the music during the warp")]
     public bool muffleDuringWarp = true;
+    /// <summary>
+    /// Low-pass cutoff frequency in hertz at the midpoint of a muffled transition.
+    /// </summary>
     public float muffledCutoff = 800f; // lower = more muffled
 
+    /// <summary>
+    /// Initial audio timeline; set to match TimeWarpManager.startInPast.
+    /// </summary>
     [Header("Start state")]
     public bool startInPast = false;
 
+    /// <summary>
+    /// Whether completed crossfades write timeline and audio-source details to the Console.
+    /// </summary>
     [Header("Debug")]
     [Tooltip("Print music volumes to the Console after every warp.")]
     public bool logVolumes = true;
 
+    /// <summary>
+    /// Unmuffled filter cutoff frequency in hertz.
+    /// </summary>
     const float OpenCutoff = 22000f;
 
+    /// <summary>
+    /// Audio sources for present music, past music, and one-shot effects.
+    /// </summary>
     AudioSource presentSource, pastSource, sfxSource;
+    /// <summary>
+    /// Filters applied temporarily to the two timeline music sources.
+    /// </summary>
     AudioLowPassFilter presentFilter, pastFilter;
+    /// <summary>
+    /// Handle for the active music crossfade coroutine.
+    /// </summary>
     Coroutine fadeRoutine;
+    /// <summary>
+    /// Current audio timeline, updated by Warp.
+    /// </summary>
     bool inPast;
 
+    /// <summary>
+    /// True when the audio state targets the past timeline.
+    /// </summary>
     public bool InPast => inPast;
 
+    /// <summary>
+    /// Enforces a single current instance and creates music sources, filters, and the effect source.
+    /// </summary>
     void Awake()
     {
         if (Instance != null && Instance != this)
@@ -65,6 +139,9 @@ public class WarpAudio : MonoBehaviour
         sfxSource.playOnAwake = false;
     }
 
+    /// <summary>
+    /// Sets initial music volumes and schedules both assigned music clips on the same audio clock tick.
+    /// </summary>
     void Start()
     {
         inPast = startInPast;
@@ -77,6 +154,9 @@ public class WarpAudio : MonoBehaviour
         if (pastSource.clip != null) pastSource.PlayScheduled(startTime);
     }
 
+    /// <summary>
+    /// Clears Instance when this component owns the current instance reference.
+    /// </summary>
     void OnDestroy()
     {
         if (Instance == this) Instance = null;
@@ -84,12 +164,18 @@ public class WarpAudio : MonoBehaviour
 
     // Listen to TimeWarpManager: it fires TimeSwappedEvent(inPast) after every successful swap,
     // so the music and warp sound follow the game without editing TimeWarpManager.
+    /// <summary>
+    /// Subscribes to successful timeline swaps and player death notifications.
+    /// </summary>
     void OnEnable()
     {
         TimeWarpManager.TimeSwappedEvent += Warp;
         PlayerRespawn.PlayerDiedEvent += PlayDeath;
     }
 
+    /// <summary>
+    /// Unsubscribes from gameplay events and sets final music volumes and filter states.
+    /// </summary>
     void OnDisable()
     {
         TimeWarpManager.TimeSwappedEvent -= Warp;
@@ -98,6 +184,10 @@ public class WarpAudio : MonoBehaviour
     }
 
     // Called by PlayerRespawn every time the player dies (hit or fell off the level).
+    /// <summary>
+    /// Plays the configured death effect with pitch variation, if a clip is assigned.
+    /// </summary>
+    /// <seealso cref="PlayerRespawn.PlayerDiedEvent"/>
     public void PlayDeath()
     {
         if (deathSfx == null) return;
@@ -106,6 +196,11 @@ public class WarpAudio : MonoBehaviour
     }
 
     // Call with true to go to the Past, false to go to the Present.
+    /// <summary>
+    /// Changes the audio timeline, plays its warp effect, and crossfades music without switching gameplay objects.
+    /// </summary>
+    /// <param name="toPast">True to target past music; false to target present music.</param>
+    /// <seealso cref="TimeWarpManager.TimeSwappedEvent"/>
     public void Warp(bool toPast)
     {
         if (toPast == inPast) return;
@@ -122,11 +217,18 @@ public class WarpAudio : MonoBehaviour
         fadeRoutine = StartCoroutine(Crossfade());
     }
 
+    /// <summary>
+    /// Toggles the audio timeline only by calling Warp with the opposite state.
+    /// </summary>
     public void ToggleWarp()
     {
         Warp(!inPast);
     }
 
+    /// <summary>
+    /// Blends music volumes and optional filter cutoffs over crossfadeTime using unscaled frame time.
+    /// </summary>
+    /// <returns>Coroutine iterator yielding once per transition frame.</returns>
     IEnumerator Crossfade()
     {
         float startPresent = presentSource.volume;
@@ -173,6 +275,9 @@ public class WarpAudio : MonoBehaviour
                       $"playing: {presentSource.isPlaying}/{pastSource.isPlaying}");
     }
 
+    /// <summary>
+    /// Sets music volumes to the current audio timeline and disables filters if sources are initialized.
+    /// </summary>
     void OnDisable_FinishFade()
     {
         // If this object gets switched off mid-warp, snap to the end state instead of
@@ -185,6 +290,13 @@ public class WarpAudio : MonoBehaviour
         fadeRoutine = null;
     }
 
+    /// <summary>
+    /// Creates a child object with a looping 2D music source and a disabled low-pass filter.
+    /// </summary>
+    /// <param name="name">Name assigned to the child GameObject.</param>
+    /// <param name="clip">Music clip assigned to the new source.</param>
+    /// <param name="filter">Receives the low-pass filter created on the child.</param>
+    /// <returns>The newly created, non-autoplay AudioSource.</returns>
     AudioSource MakeMusicSource(string name, AudioClip clip, out AudioLowPassFilter filter)
     {
         var child = new GameObject(name);
@@ -205,3 +317,15 @@ public class WarpAudio : MonoBehaviour
         return source;
     }
 }
+
+/*! \var AudioSource WarpAudio::pastSource
+ *  \brief Audio source for past music.
+ */
+
+/*! \var AudioSource WarpAudio::sfxSource
+ *  \brief Audio source for warp and death effects.
+ */
+
+/*! \var AudioLowPassFilter WarpAudio::pastFilter
+ *  \brief Filter used to muffle past music during a warp.
+ */

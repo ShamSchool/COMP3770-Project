@@ -1,0 +1,36 @@
+# Run from the repository root with Doxygen 1.18.0.
+PROJECT_NAME           = "Timefall"
+PROJECT_BRIEF          = "AstroGames - COMP3770 Milestone 3 code documentation"
+OUTPUT_DIRECTORY       = docs
+OUTPUT_LANGUAGE        = English
+
+# Include PlayerMovement, which is outside Assets/Scripts.
+INPUT                  = AstroGames_UnityProject_v1/Assets/PlayerMovement.cs \
+                         AstroGames_UnityProject_v1/Assets/Scripts \
+                         docs/Code_Overview.md
+FILE_PATTERNS          = *.cs *.md
+RECURSIVE              = YES
+USE_MDFILE_AS_MAINPAGE  = docs/Code_Overview.md
+
+# Keep warnings active so missing comments are visible.
+EXTRACT_ALL            = NO
+EXTRACT_PRIVATE        = YES
+WARNINGS               = YES
+WARN_IF_UNDOCUMENTED   = YES
+WARN_IF_DOC_ERROR      = YES
+WARN_NO_PARAMDOC       = YES
+
+GENERATE_HTML          = YES
+HTML_OUTPUT            = html
+GENERATE_LATEX         = NO
+GENERATE_XML           = NO
+HAVE_DOT               = NO
+FULL_PATH_NAMES        = NO
+
+# Class navigation and source-code display.
+GENERATE_TREEVIEW      = YES
+HTML_COLORSTYLE        = DARK
+SOURCE_BROWSER         = YES
+INLINE_SOURCES         = YES
+REFERENCES_RELATION    = YES
+REFERENCED_BY_RELATION = YES

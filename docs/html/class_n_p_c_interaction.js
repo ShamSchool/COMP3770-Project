@@ -1,0 +1,28 @@
+var class_n_p_c_interaction =
+[
+    [ "DisplayCurrentPage", "class_n_p_c_interaction.html#a980c1875161f2d86b232b4c3da5b2937", null ],
+    [ "EndDialogue", "class_n_p_c_interaction.html#aa3c1a008e8f9a3615ff38260f4d19f89", null ],
+    [ "FinishTyping", "class_n_p_c_interaction.html#acd9e22ff237cb5aaedd490501c1067d4", null ],
+    [ "NextDialoguePage", "class_n_p_c_interaction.html#a4b7dc363f86d9e10214b30eb74548574", null ],
+    [ "OnTriggerEnter2D", "class_n_p_c_interaction.html#a2d564d82548ad6ee17dcdc6a6d4cc82f", null ],
+    [ "OnTriggerExit2D", "class_n_p_c_interaction.html#aa03e8b3c14148f7594e150c8a7bad781", null ],
+    [ "Start", "class_n_p_c_interaction.html#a565fa4ff3e3897dc67788d862d9e7f3b", null ],
+    [ "StartDialogue", "class_n_p_c_interaction.html#a1b939e49dabac1db2b20859669c2c9dc", null ],
+    [ "TypeDialogue", "class_n_p_c_interaction.html#a71556a07b64ac7e3409d8c9342416f1d", null ],
+    [ "Update", "class_n_p_c_interaction.html#a07da0ba6040fc200a9fdcbe2ca6093d3", null ],
+    [ "audioSource", "class_n_p_c_interaction.html#a32c27001164e63bb3dce2ac0f2d07ddc", null ],
+    [ "continuePrompt", "class_n_p_c_interaction.html#a7d98cf475983e4c59b9dd922cf778038", null ],
+    [ "currentPage", "class_n_p_c_interaction.html#af0ed51f72fef62cfe61df45b7efdea3a", null ],
+    [ "dialogueOpen", "class_n_p_c_interaction.html#a1b509702cfeef8ab30b6042b35d62066", null ],
+    [ "dialoguePages", "class_n_p_c_interaction.html#aeaef24f937517c0501e45dd357cf9b96", null ],
+    [ "dialoguePanel", "class_n_p_c_interaction.html#aac3ce2d22ed645b3015bc6f5178e60f2", null ],
+    [ "dialogueText", "class_n_p_c_interaction.html#ab4281749fefc65f364f2e48a34fc22a8", null ],
+    [ "interactionPrompt", "class_n_p_c_interaction.html#aad780193cb96a3bcdc7d7e90f413d29d", null ],
+    [ "isTyping", "class_n_p_c_interaction.html#ace250739025ab468cb0bc25c8d91e1bc", null ],
+    [ "npcName", "class_n_p_c_interaction.html#aea81788e8d55bc40c10ab69e4266b632", null ],
+    [ "npcNameText", "class_n_p_c_interaction.html#a5dcc1071b9e48a410c2f6e061ae078bc", null ],
+    [ "pageIndicator", "class_n_p_c_interaction.html#a858efb89c21404645001b8813136253f", null ],
+    [ "playerInRange", "class_n_p_c_interaction.html#a541ce494915bb92a24a4de0d0024bc4e", null ],
+    [ "typingCoroutine", "class_n_p_c_interaction.html#a8428f36c1c4ac6eada12f68f850f93c7", null ],
+    [ "typingSpeed", "class_n_p_c_interaction.html#a626c19b1ac221d337c8b2cc943e62606", null ]
+];

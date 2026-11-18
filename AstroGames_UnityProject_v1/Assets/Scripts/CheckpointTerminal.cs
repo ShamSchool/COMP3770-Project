@@ -1,23 +1,54 @@
 using UnityEngine;
 using TMPro;
 
+/// <summary>
+/// Lets a nearby player press F once to save a checkpoint or restore the level-start respawn location.
+/// </summary>
+/// <remarks>
+/// Uses a 2D trigger and the Player tag to find PlayerRespawn. Optional UI references display interaction and activation messages.
+/// </remarks>
+/// <seealso cref="PlayerRespawn"/>
 public class CheckpointTerminal : MonoBehaviour
 {
+    /// <summary>
+    /// True to restore the original respawn location; false to save a checkpoint.
+    /// </summary>
     [Header("Terminal Type")]
     [SerializeField] private bool resetToStartTerminal = false;
 
+    /// <summary>
+    /// Position and rotation saved by a regular checkpoint terminal.
+    /// </summary>
     [Header("Checkpoint Settings")]
     [SerializeField] private Transform respawnPoint;
 
+    /// <summary>
+    /// Optional UI object displaying the interaction prompt.
+    /// </summary>
     [Header("Interaction Prompt")]
     [SerializeField] private GameObject interactionPrompt;
+    /// <summary>
+    /// Optional text label displaying the prompt or activation confirmation.
+    /// </summary>
     [SerializeField] private TMP_Text promptText;
 
+    /// <summary>
+    /// Whether a Player-tagged collider is inside the terminal trigger.
+    /// </summary>
     private bool playerInRange = false;
+    /// <summary>
+    /// Whether this terminal has already been activated.
+    /// </summary>
     private bool terminalActivated = false;
 
+    /// <summary>
+    /// PlayerRespawn component found on the entering player collider or its parents.
+    /// </summary>
     private PlayerRespawn playerRespawn;
 
+    /// <summary>
+    /// Hides the interaction prompt when assigned.
+    /// </summary>
     private void Start()
     {
         if (interactionPrompt != null)
@@ -26,6 +57,9 @@ public class CheckpointTerminal : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Activates an unused terminal when the nearby player presses F.
+    /// </summary>
     private void Update()
     {
         if (playerInRange && !terminalActivated &&
@@ -35,6 +69,10 @@ public class CheckpointTerminal : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Finds the entering player and displays the appropriate interaction prompt.
+    /// </summary>
+    /// <param name="other">Collider entering the terminal trigger; only the Player tag is accepted.</param>
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (!other.CompareTag("Player"))
@@ -69,6 +107,10 @@ public class CheckpointTerminal : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Clears the range flag and hides the prompt when the player leaves.
+    /// </summary>
+    /// <param name="other">Collider leaving the terminal trigger; only the Player tag is accepted.</param>
     private void OnTriggerExit2D(Collider2D other)
     {
         if (!other.CompareTag("Player"))
@@ -84,6 +126,11 @@ public class CheckpointTerminal : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Updates PlayerRespawn with the selected spawn location and shows confirmation.
+    /// </summary>
+    /// <seealso cref="PlayerRespawn.SetCheckpoint"/>
+    /// <seealso cref="PlayerRespawn.ResetToStart"/>
     private void ActivateTerminal()
     {
         if (playerRespawn == null)
