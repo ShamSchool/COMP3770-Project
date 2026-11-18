@@ -1,36 +1,76 @@
+
 using UnityEngine;
 
 [DisallowMultipleComponent]
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerRespawn : MonoBehaviour
 {
-    [Tooltip("Optional spawn marker. If empty, use the player's position when the scene starts.")]
+    [Header("Spawn Settings")]
+    [Tooltip("Original level starting position.")]
     [SerializeField] private Transform spawnPoint;
 
     [Tooltip("Respawn when the player's world Y position falls below this value.")]
     [SerializeField] private float fallThreshold = -12f;
 
-    // Fired every time the player dies (hit a hazard or fell off the level), just before respawning.
-    // Other scripts (audio, screen effects, death counter) can listen without touching this one.
-    public static event System.Action PlayerDiedEvent;
-
     private Rigidbody2D body;
+
     private Vector3 initialPosition;
     private Quaternion initialRotation;
+
+    // Current location where the player will respawn
+    private Vector3 currentRespawnPosition;
+    private Quaternion currentRespawnRotation;
+
     private bool respawnRequested;
+
+    public static event System.Action PlayerDiedEvent;
 
     private void Awake()
     {
         body = GetComponent<Rigidbody2D>();
-        initialPosition = transform.position;
-        initialRotation = transform.rotation;
+
+        initialPosition = spawnPoint != null
+            ? spawnPoint.position
+            : transform.position;
+
+        initialRotation = spawnPoint != null
+            ? spawnPoint.rotation
+            : transform.rotation;
+
+        // Initially, respawn at the level start
+        currentRespawnPosition = initialPosition;
+        currentRespawnRotation = initialRotation;
     }
 
+    // Save a new checkpoint
+    public void SetCheckpoint(Transform checkpoint)
+    {
+        if (checkpoint == null)
+        {
+            Debug.LogWarning("Checkpoint position is missing!");
+            return;
+        }
+
+        currentRespawnPosition = checkpoint.position;
+        currentRespawnRotation = checkpoint.rotation;
+
+        Debug.Log("Checkpoint saved!");
+    }
+
+    // Reset respawn location to the beginning of the level
+    public void ResetToStart()
+    {
+        currentRespawnPosition = initialPosition;
+        currentRespawnRotation = initialRotation;
+
+        Debug.Log("Respawn location reset to level start!");
+    }
+
+    // Request a player respawn
     public void RequestRespawn()
     {
         if (isActiveAndEnabled)
         {
-            // Multiple contacts in one physics step should only cause one reset.
             respawnRequested = true;
         }
     }
@@ -44,18 +84,22 @@ public class PlayerRespawn : MonoBehaviour
 
         respawnRequested = false;
 
-        // Let listeners know the player died (death sound, etc.).
+        // Notify listeners that the player died
         PlayerDiedEvent?.Invoke();
 
-        Vector3 position = spawnPoint != null ? spawnPoint.position : initialPosition;
-        Quaternion rotation = spawnPoint != null ? spawnPoint.rotation : initialRotation;
-
-        // Defer teleporting until outside collision callbacks. Keep the current era.
+        // Stop all player movement
         body.linearVelocity = Vector2.zero;
         body.angularVelocity = 0f;
-        body.position = position;
-        body.rotation = rotation.eulerAngles.z;
-        transform.SetPositionAndRotation(position, rotation);
+
+        // Move player to the current respawn position
+        body.position = currentRespawnPosition;
+        body.rotation = currentRespawnRotation.eulerAngles.z;
+
+        transform.SetPositionAndRotation(
+            currentRespawnPosition,
+            currentRespawnRotation
+        );
+
         body.WakeUp();
     }
 
@@ -64,3 +108,4 @@ public class PlayerRespawn : MonoBehaviour
         respawnRequested = false;
     }
 }
+
